@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="pl" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Culinary Studio – przepisy, przekąski, dania, desery</title>
+  <meta name="description" content="Proste przepisy: przekąski, dania i desery. Wyszukiwarka, tagi, ulubione, lightbox, kalkulator kalorii i generator przepisów." />
+  <link rel="canonical" href="https://culinary-studio.netlify.app/">
+  <meta name="theme-color" content="#ef4444">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <meta property="og:title" content="Culinary Studio" />
+  <meta property="og:description" content="Proste przepisy krok po kroku." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/images/hero.jpg" />
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#home" aria-label="Culinary Studio – strona główna">
+        <span class="logo" aria-hidden="true">🍰</span>
+        <span class="brand-name">Culinary Studio</span>
+      </a>
+      <nav class="nav-links" aria-label="Główna nawigacja">
+        <a href="#przekaski">Przekąski</a>
+        <a href="#dania">Dania</a>
+        <a href="#desery">Desery</a>
+        <a href="#kalorie">Kalkulator</a>
+        <button id="themeToggle" class="toggle" aria-label="Przełącz tryb jasny/ciemny">🌓</button>
+        <button id="printBtn" class="toggle" aria-label="Drukuj stronę">🖨️</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="home" class="container">
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div>
+        <h1 id="hero-title">Proste i pyszne przepisy, które zawsze wychodzą</h1>
+        <p>Filtruj po tagach, szukaj po nazwie i zapisuj ulubione. Czysty HTML/CSS/JS – idealne pod Netlify.</p>
+        <div class="searchbar" role="search">
+          <input id="search" type="search" placeholder="Szukaj przepisu… (np. tiramisu, makaron)" aria-label="Szukaj przepisu" />
+        </div>
+        <div id="tagBar" class="tags" aria-label="Filtruj po tagach">
+          <button class="tag" data-tag="przekaski">przekąski</button>
+          <button class="tag" data-tag="dania">dania</button>
+          <button class="tag" data-tag="desery">desery</button>
+          <button class="tag" data-tag="wegetarianskie">wegetariańskie</button>
+          <button class="tag" data-tag="bezglutenowe">bezglutenowe</button>
+          <button class="tag" data-tag="szybkie">szybkie</button>
+        </div>
+      </div>
+      <img src="/images/hero.jpg" alt="Stół z różnymi potrawami" loading="lazy" />
+    </section>
+
+    <!-- Sekcje przepisów -->
+    <section id="przekaski" aria-labelledby="przekaski-title">
+      <div class="section-head">
+        <h2 id="przekaski-title" class="section-title">Przekąski</h2>
+        <div class="count muted" aria-live="polite"></div>
+      </div>
+      <div id="grid-przekaski" class="grid" aria-live="polite"></div>
+    </section>
+
+    <section id="dania" aria-labelledby="dania-title">
+      <div class="section-head">
+        <h2 id="dania-title" class="section-title">Dania główne</h2>
+        <div class="count muted" aria-live="polite"></div>
+      </div>
+      <div id="grid-dania" class="grid" aria-live="polite"></div>
+    </section>
+
+    <section id="desery" aria-labelledby="desery-title">
+      <div class="section-head">
+        <h2 id="desery-title" class="section-title">Desery</h2>
+        <div class="count muted" aria-live="polite"></div>
+      </div>
+      <div id="grid-desery" class="grid" aria-live="polite"></div>
+    </section>
+
+    <!-- Kalkulator kalorii i kreator potrawy -->
+    <section id="kalorie" aria-labelledby="kalorie-title">
+      <h2 id="kalorie-title" class="section-title">Kalkulator kalorii & generator przepisu</h2>
+      <p class="muted">Wybierz produkt, podaj ilość i dodaj do potrawy. Kliknij „Utwórz przepis”, aby dodać nową kartę do sekcji.</p>
+      <div class="cal-form">
+        <label>Produkt
+          <select id="cal-product"></select>
+        </label>
+        <label>Ilość (g)
+          <input id="cal-grams" type="number" min="1" step="1" placeholder="100" value="100">
+        </label>
+        <button id="cal-add" class="btn">Dodaj do potrawy</button>
+      </div>
+      <div class="cal-wrap">
+        <table class="cal-table">
+          <thead>
+            <tr><th>Składnik</th><th>Ilość (g)</th><th>Kcal</th><th></th></tr>
+          </thead>
+          <tbody id="cal-body"></tbody>
+          <tfoot>
+            <tr><td colspan="2"><strong>Suma</strong></td><td id="cal-total">0</td><td></td></tr>
+          </tfoot>
+        </table>
+        <div class="cal-actions">
+          <input id="dish-name" type="text" placeholder="Nazwa Twojej potrawy">
+          <select id="dish-category" title="Kategoria przepisu">
+            <option value="dania" selected>Danie główne</option>
+            <option value="przekaski">Przekąska</option>
+            <option value="desery">Deser</option>
+          </select>
+          <button id="dish-make-recipe" class="btn">Utwórz przepis</button>
+          <button id="dish-clear" class="btn secondary">Wyczyść</button>
+        </div>
+        <div id="saved-dishes" class="saved"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">© <span id="year"></span> Culinary Studio • <a href="#">Polityka prywatności</a></div>
+  </footer>
+
+  <!-- Lightbox Modal -->
+  <div id="modal" class="modal" role="dialog" aria-modal="true" aria-label="Podgląd zdjęcia przepisu">
+    <img id="modalImg" alt="Podgląd zdjęcia przepisu" />
+  </div>
+
+  <script src="./script.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(()=>{});
+      });
+    }
+  </script>
+</body>
+</html>
