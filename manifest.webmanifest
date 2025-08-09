@@ -1,0 +1,9 @@
+{
+  "name": "Culinary Studio",
+  "short_name": "Culinary",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ef4444",
+  "icons": []
+}
